@@ -20,22 +20,25 @@ public class UserServiceImpl implements UserService {
     private SessionFactory sessionFactory;
 
     @Transactional
-    public void save(User user) {
+    public User save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
+        return user;
     }
 
     @Transactional
-    public void update(User user) {
+    public User update(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.update(user);
+        return user;
     }
 
     @Transactional
-    public void delete(String id) {
+    public User delete(String id) {
         Session session = sessionFactory.getCurrentSession();
         User user = (User) session.get(User.class, id);
         session.delete(user);
+        return user;
     }
 
     @Transactional(readOnly = true)

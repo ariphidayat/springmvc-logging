@@ -1,5 +1,7 @@
 package org.arip.logging.service.impl;
 
+import org.arip.logging.aop.AuditActionType;
+import org.arip.logging.aop.Auditable;
 import org.arip.logging.model.User;
 import org.arip.logging.service.UserService;
 import org.hibernate.Session;
@@ -20,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private SessionFactory sessionFactory;
 
     @Transactional
+    @Auditable(actionType = AuditActionType.CREATE)
     public User save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
+    @Auditable(actionType = AuditActionType.UPDATE)
     public User update(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.update(user);
@@ -34,6 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
+    @Auditable(actionType = AuditActionType.DELETE)
     public User delete(String id) {
         Session session = sessionFactory.getCurrentSession();
         User user = (User) session.get(User.class, id);

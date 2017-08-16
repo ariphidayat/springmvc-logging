@@ -1,6 +1,9 @@
 package org.arip.logging.model;
 
+import org.arip.logging.aop.AuditTargetId;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Arip Hidayat on 12/9/2015.
@@ -9,6 +12,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
+    @AuditTargetId
     private String id;
 
     @Column
